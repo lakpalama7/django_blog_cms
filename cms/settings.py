@@ -124,3 +124,5 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+LOGIN_URL='/blog/login/'  #if user has not logged in then send to login page, no access to create blog page
