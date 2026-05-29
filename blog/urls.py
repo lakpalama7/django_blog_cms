@@ -9,7 +9,7 @@ urlpatterns = [
     path("register/", register, name='register'),
     path("login/", loginuser, name='login'),
     path("create/", create_blog, name='create_blog'),
-    path("edit/", edit_blog, name='edit_blog'),
+    path("<int:blog_id>/edit", edit_blog, name='edit_blog'),
     path("<int:blog_id>/", single_blog, name='single_blog'),
     path("<int:blog_id>/delete",delete_blog, name='delete_blog'),
 
