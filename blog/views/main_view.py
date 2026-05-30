@@ -1,8 +1,9 @@
 
 
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Blogs
+from ..models import Blogs, Contact
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def home(request):
@@ -69,3 +70,23 @@ def delete_blog(request, blog_id):
     else:
         return redirect('single_blog', blog_id=blog.id)
    
+
+def about_blog(request):
+    return render(request,'main/about_blog.html')
+
+def contact_blog(request):
+    
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        if name == '' or email == '' or subject == '' or message == '':
+            messages.error(request,"Fill the required all content")
+        else:
+            contact = Contact(name=name,email=email,subject=subject,message=message)
+            contact.save()
+            messages.success(request,"message sent successfully")
+        
+    return render(request,'main/contact_blog.html')
